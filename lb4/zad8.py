@@ -11,7 +11,9 @@ def main():
         while True:
             conn, addr = sock.accept()
 
-            data = conn.recv(20)
+            data = b""
+            while len(data) < 20:
+                data += conn.recv(20)
 
             conn.send(data)
             conn.close()
