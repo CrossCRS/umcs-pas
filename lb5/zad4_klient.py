@@ -3,7 +3,10 @@ from timeit import default_timer as timer
 
 # TCP Echo Time: 0.0004139790007684496
 # UDP Echo Time: 0.00016513900027348427
-# UDP jest szybsze ze względu na brak konieczności handshake'u i sprawdzania sum kontrolnych
+#
+# UDP jest szybsze ze względu na mniejszy overhead
+# z powodu brak konieczności handshake'u i sprawdzania sum kontrolnych
+#
 # Zalety TCP:
 #   - wiedza czy klient jest wciąż "podłączony"
 #   - weryfikacja czy pakiety zostały dostarczone poprawnie
