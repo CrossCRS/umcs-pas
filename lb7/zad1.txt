@@ -1,0 +1,10 @@
+Trying 138.2.147.71...
+Connected to dsmka.wintertoad.xyz.
+Escape character is '^]'.
++OK Dovecot (Debian) ready.
+USER test2@wintertoad.xyz
++OK
+PASS P@ssw0rd
++OK Logged in.
+STAT
++OK 15 19703

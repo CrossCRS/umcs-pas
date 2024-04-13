@@ -1,0 +1,28 @@
+Trying 138.2.147.71...
+Connected to dsmka.wintertoad.xyz.
+Escape character is '^]'.
++OK Dovecot (Debian) ready.
+USER test2@wintertoad.xyz
++OK
+PASS P@ssw0rd
++OK Logged in.
+LIST
++OK 15 messages:
+1 1128
+2 1161
+3 1123
+4 1352
+5 1121
+6 1030
+7 1053
+8 596
+9 559
+10 1071
+11 1379
+12 4613
+13 1166
+14 1274
+15 1077
+.
+DELE 9
++OK Marked to be deleted.

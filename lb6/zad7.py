@@ -48,7 +48,7 @@ def main():
         sock.send(b"DATA\r\n")
         sock.recv(1024)
         sock.send(b"Subject: " + subject.encode() + b"\r\n")
-        sock.send(b"From: " + email_from.encode() + b"\r\n")
+        sock.send(b"From: " + email_from.encode() + b">\r\n")
         sock.send(b"To: <" + recipients[0].encode() + b">\r\n")
         if len(recipients) > 1:
             sock.send(b"CC: <" + ",".join(recipients[1:]).encode() + b">\r\n")
@@ -70,7 +70,6 @@ def main():
         print("Login failed")
 
     sock.close()
-    pass
 
 if __name__ == "__main__":
     main()

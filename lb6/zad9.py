@@ -37,7 +37,7 @@ def main():
         sock.send(b"DATA\r\n")
         sock.recv(1024)
         sock.send(b"Subject: " + SUBJECT.encode() + b"\r\n")
-        sock.send(b"From: " + FROM.encode() + b"\r\n")
+        sock.send(b"From: " + FROM.encode() + b">\r\n")
         sock.send(b"To: <" + TO.encode() + b">\r\n")
 
         sock.send(b"MIME-Version: 1.0\r\n")
@@ -52,7 +52,6 @@ def main():
         print("Login failed")
 
     sock.close()
-    pass
 
 if __name__ == "__main__":
     main()
