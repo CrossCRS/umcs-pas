@@ -1,7 +1,5 @@
-# TODO: Naprawic
 #!/usr/bin/env python3
 import socket
-import random
 
 PORT = 1234
 
@@ -23,7 +21,12 @@ def main():
             data_mode = False
 
             while True:
-                data = conn.recv(4096).decode()
+                data = conn.recv(4096)
+                
+                if not data:
+                    continue
+
+                data = data.decode()
                 data_split = data.split(" ")
 
                 if data_split[0].upper() == "QUIT\r\n":
@@ -44,18 +47,18 @@ def main():
                         conn.send(b"503 5.5.1 Error: send HELO/EHLO first\r\n")
                         break
                     if data_split[1].upper() == "FROM:":
-                        pass
+                        conn.send(b"250 2.1.0 Ok")
                     elif data_split[1].upper() == "TO:":
-                        pass
+                        conn.send(b"250 2.1.5 Ok")
                     else:
                         conn.send(b"501 Syntax\r\n")
-                elif data_split[0].upper() == "DATA":
+                elif data_split[0].upper() == "DATA\r\n":
                     if not authenticated:
                         conn.send(b"503 5.5.1 Error: send HELO/EHLO first\r\n")
                         break
                     data_mode = True
                     conn.send(b"354 End data with <CR><LF>.<CR><LF>\r\n")
-                elif data == "\r\n.\r\n" and data_mode:
+                elif data.endswith("\r\n.\r\n") and data_mode:
                     if not authenticated:
                         conn.send(b"503 5.5.1 Error: send HELO/EHLO first\r\n")
                         break
@@ -71,8 +74,7 @@ def main():
                             auth_state = 3
                             authenticated = True
                             auth_mode = False
-
-                    if not data_mode:
+                    elif not data_mode:
                         conn.send(b"501 Syntax\r\n")
 
             conn.close()
