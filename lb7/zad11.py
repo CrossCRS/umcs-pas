@@ -1,4 +1,6 @@
 import socket
+import base64
+import re
 
 HOST="dsmka.wintertoad.xyz"
 PORT=110
@@ -30,7 +32,15 @@ def main():
         sock.send(b"RETR " + str(MAIL_ID).encode() + b"\r\n")
 
         resp = recv_all_until(sock, b".\r\n").decode()
-        print(resp)
+
+        data = re.findall(r"--sep(.*)--sep--", resp, re.DOTALL)[0]
+        filename = re.findall(r"filename=\"(.*)\"", data)[0]
+        file = base64.b64decode(re.findall(r"base64(.*)$", data, re.DOTALL)[0].replace("\n", ""))
+
+        with open(filename, "wb") as f:
+            f.write(file)
+
+        print("File saved to " + filename)
     else:
         print("Login failed")
 
