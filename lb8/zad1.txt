@@ -1,0 +1,69 @@
+Trying 138.2.147.71...
+Connected to dsmka.wintertoad.xyz.
+Escape character is '^]'.
+* OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE LITERAL+ AUTH=PLAIN AUTH=LOGIN] Dovecot (Debian) ready.
+A1 LOGIN test2@wintertoad.xyz P@ssw0rd
+A1 OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE SORT SORT=DISPLAY THREAD=REFERENCES THREAD=REFS THREAD=ORDEREDSUBJECT MULTIAPPEND URL-PARTIAL CATENATE UNSELECT CHILDREN NAMESPACE UIDPLUS LIST-EXTENDED I18NLEVEL=1 CONDSTORE QRESYNC ESEARCH ESORT SEARCHRES WITHIN CONTEXT=SEARCH LIST-STATUS BINARY MOVE SNIPPET=FUZZY PREVIEW=FUZZY STATUS=SIZE SAVEDATE LITERAL+ NOTIFY SPECIAL-USE QUOTA] Logged in
+A2 LIST "" *
+* LIST (\HasNoChildren \Drafts) "." Drafts
+* LIST (\HasNoChildren \Junk) "." Junk
+* LIST (\HasNoChildren \Trash) "." Trash
+* LIST (\HasNoChildren \Sent) "." Sent
+* LIST (\HasNoChildren) "." INBOX
+A2 OK List completed (0.004 + 0.000 + 0.004 secs).
+A6 STATUS Drafts (MESSAGES)
+* STATUS Drafts (MESSAGES 0)
+A6 OK Status completed (0.016 + 0.000 + 0.015 secs).
+A7 STATUS Junk (MESSAGES)
+* STATUS Junk (MESSAGES 0)
+A7 OK Status completed (0.014 + 0.000 + 0.013 secs).
+A8 STATUS Trash (MESSAGES)
+* STATUS Trash (MESSAGES 0)
+A8 OK Status completed (0.011 + 0.000 + 0.010 secs).
+A9 STATUS Sent (MESSAGES)
+* STATUS Sent (MESSAGES 0)
+A9 OK Status completed (0.013 + 0.000 + 0.012 secs).
+A10 STATUS INBOX (MESSAGES)
+* STATUS INBOX (MESSAGES 25)
+A10 OK Status completed (0.001 + 0.000 secs).
+A11 SELECT INBOX
+* FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
+* OK [PERMANENTFLAGS (\Answered \Flagged \Deleted \Seen \Draft \*)] Flags permitted.
+* 25 EXISTS
+* 0 RECENT
+* OK [UNSEEN 15] First unseen.
+* OK [UIDVALIDITY 1712573141] UIDs valid
+* OK [UIDNEXT 27] Predicted next UID
+A11 OK [READ-WRITE] Select completed (0.001 + 0.000 secs).
+A12 FETCH 1 BODY[]
+* 1 FETCH (BODY[] {1128}
+Return-Path: <test1@wintertoad.xyz>
+Delivered-To: test2@wintertoad.xyz
+Received: from dsmka.wintertoad.xyz
+	by dsmka.wintertoad.xyz with LMTP
+	id tM1+F9XKE2b4CgAABiRgGA
+	(envelope-from <test1@wintertoad.xyz>)
+	for <test2@wintertoad.xyz>; Mon, 08 Apr 2024 10:45:41 +0000
+Received: from test1 (unknown [212.182.27.80])
+	(Authenticated sender: test1@wintertoad.xyz)
+	by dsmka.wintertoad.xyz (Postfix) with ESMTPA id 52B7E11364B
+	for <test2@wintertoad.xyz>; Mon,  8 Apr 2024 10:45:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=wintertoad.xyz;
+	s=mail; t=1712573141;
+	bh=dpj1k6WwIrocwGPtCRQR/Z330geJ0URY3vLEQSivIH0=; h=To:From:Subject;
+	b=h1scWnAnF7up3lm1PrZ5ayGHKI5AySL3fkNZOAbTzNskiDcwZ8lU/julozn5XIqjQ
+	 YMFubKRBPoBbcuX3egkCzIhoHoCKHaBLRn01JJbB/qmT4Al2SZb+CsunQr428EDfuB
+	 7Plk9o3U8G2Vwr2iheWW2vsjOglN6dQUiv/F+yONQWgrPLKL10Hnu3AAV/oUSkZ9O9
+	 Kk0ijN283jaDsm9AZHAJLZkL/xlF2ZUxyEbNJNxpGpsmTmUortUJjHLLzw+np/p0gE
+	 Wfca1F26zXUapx4jFFAzA+LEGkJtNRqGDIyhgELRD0GWpP2pCWceXZVJQOAnSoIO9Y
+	 JYMZ8Ew7JKNLw==
+To: <test2@wintertoad.xyz>
+From: <test1@wintertoad.xyz>
+Subject: test pierwszy
+
+xd
+
+)
+A12 OK Fetch completed (0.004 + 0.000 + 0.003 secs).
+A13 STORE 1 +FLAGS \Seen
+A13 OK Store completed (0.001 + 0.000 secs).

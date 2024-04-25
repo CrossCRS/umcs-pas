@@ -1,0 +1,27 @@
+Return-Path: <test1@wintertoad.xyz>
+Delivered-To: test2@wintertoad.xyz
+Received: from dsmka.wintertoad.xyz
+	by dsmka.wintertoad.xyz with LMTP
+	id tM1+F9XKE2b4CgAABiRgGA
+	(envelope-from <test1@wintertoad.xyz>)
+	for <test2@wintertoad.xyz>; Mon, 08 Apr 2024 10:45:41 +0000
+Received: from test1 (unknown [212.182.27.80])
+	(Authenticated sender: test1@wintertoad.xyz)
+	by dsmka.wintertoad.xyz (Postfix) with ESMTPA id 52B7E11364B
+	for <test2@wintertoad.xyz>; Mon,  8 Apr 2024 10:45:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=wintertoad.xyz;
+	s=mail; t=1712573141;
+	bh=dpj1k6WwIrocwGPtCRQR/Z330geJ0URY3vLEQSivIH0=; h=To:From:Subject;
+	b=h1scWnAnF7up3lm1PrZ5ayGHKI5AySL3fkNZOAbTzNskiDcwZ8lU/julozn5XIqjQ
+	 YMFubKRBPoBbcuX3egkCzIhoHoCKHaBLRn01JJbB/qmT4Al2SZb+CsunQr428EDfuB
+	 7Plk9o3U8G2Vwr2iheWW2vsjOglN6dQUiv/F+yONQWgrPLKL10Hnu3AAV/oUSkZ9O9
+	 Kk0ijN283jaDsm9AZHAJLZkL/xlF2ZUxyEbNJNxpGpsmTmUortUJjHLLzw+np/p0gE
+	 Wfca1F26zXUapx4jFFAzA+LEGkJtNRqGDIyhgELRD0GWpP2pCWceXZVJQOAnSoIO9Y
+	 JYMZ8Ew7JKNLw==
+To: <test2@wintertoad.xyz>
+From: <test1@wintertoad.xyz>
+Subject: test pierwszy
+
+xd
+
+)
