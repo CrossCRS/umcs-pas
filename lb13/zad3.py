@@ -1,4 +1,4 @@
-import socket, threading, os
+import socket, threading
 
 PORT=10000
 
@@ -7,32 +7,24 @@ class ClientThread(threading.Thread):
         threading.Thread.__init__(self)
         self.conn = conn
 
+        self.data = None
+        with open("zad3/diagram.jpg", "rb") as f:
+            self.data = f.read()
+
+        if self.data is None:
+            print("Error: Couldn't read zad3/diagram.jpg")
+            return
+
     def run(self):
         while True:
             data = self.conn.recv(8192)
             data_decoded = data.decode(errors='ignore')
-            data_split = data_decoded.split(' ')
 
-            if data_decoded == "LIST\r\n":
-                files = next(os.walk('files/'))[2]
-                msg = ""
-                for f in files:
-                    msg += f"'{f}'"
-                    msg += " "
-                
-                self.conn.sendall(f"{msg}\r\n".encode())
-            elif data_split[0] == "GET":
-                try:
-                    f = open(f"files/{data_split[1:]}", "rb")
-                    f_data = f.read()
-                    # TODO: Send xd
-                except:
-                    self.conn.sendall("INVALID_FILE\r\n".encode())
-            elif data_decoded == "EXIT\r\n":
-                self.conn.close()
-                break
+            if data_decoded == "GET_IMAGE\r\n":
+                self.conn.sendall(f"SIZE {len(self.data)} NAME diagram.jpg\r\n".encode())
+                self.conn.sendall(self.data)
             else:
-                self.conn.sendall("INVALID_CMD\r\n".encode())
+                self.conn.sendall("ERROR\r\n".encode())
 
 
 class Server:
