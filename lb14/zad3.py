@@ -5,6 +5,8 @@ import ssl
 HOST="chat.freenode.net"
 PORT=7000
 
+OPENWEATHER_API_KEY = "CHANGEME"
+
 def recv(sock):
     resp = b""
     try:
@@ -19,7 +21,7 @@ def recv(sock):
     if resp.decode().startswith("PING"):
         sock.send(b"PONG " + resp.split()[1] + b"\r\n")
         return recv(sock)
-    
+
     return resp
 
 def main():
@@ -28,13 +30,21 @@ def main():
     sock.connect((HOST, PORT))
 
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-    context.check_hostname = False
-    context.verify_mode = ssl.CERT_NONE
+    context.check_hostname = True
+    context.verify_mode = ssl.CERT_REQUIRED
+    context.load_verify_locations('./zad3.pem', capath='/etc/ssl/certs')
 
     if ssl.HAS_SNI:
         secure_sock = context.wrap_socket(sock, server_hostname=HOST)
     else:
         secure_sock = context.wrap_socket(sock)
+
+    cert = secure_sock.getpeercert()
+    if not cert:
+        raise Exception('Certificate error')
+
+    if not cert.get('issuer')[1][0][1] == "ZeroSSL":
+        raise Exception('Certificate error')
 
     print(recv(secure_sock))
     secure_sock.send(b"NICK nb_bot_4242\r\n")
